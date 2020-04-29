@@ -8,13 +8,20 @@
 
   <script>
     // start with strings, numbers and booleans
-
+    let age = 100;
+    let age2 = age;
+    age = 200;
+    //  console.log(age, age2);
+    
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
-
+    const team = players;
+    //console.log(players, team);
+    
     // You might think we can just do something like this:
+    //team[3] = 'lux';
 
     // however what happens when we update that array?
 
@@ -27,15 +34,21 @@
     // So, how do we fix this? We take a copy instead!
 
     // one way
+    const team2 = players.slice();
 
     // or create a new array and concat the old one in
-
+    const team3 = [].concat(players);
+    
     // or use the new ES6 Spread
+    const team4 = [...players];
+    
 
     // now when we update it, the original one isn't changed
+    team4[3] = 'hee haw';
+    console.log(team4);
 
     // The same thing goes for objects, let's say we have a person object
-
+    const team5 = Array.from(players);
     // with Objects
     const person = {
       name: 'Wes Bos',
@@ -43,12 +56,46 @@
     };
 
     // and think we make a copy:
-
+    const captain = person;
+    //captain.number = 99;
+    console.log(captain);
+    
     // how do we take a copy instead?
-
+    cap2 = Object.assign({}, person, { number: 99, age: 12 });
+    console.log(cap2);
+    console.log(captain);
+    console.log(cap2);
+    
+    
     // We will hopefully soon see the object ...spread
+    const cap3 = {...person};
+    console.log(cap3);
+    
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    const wes = {
+      name: 'Wes',
+      age: 100,
+      social: {
+        twitter: '@wesbos',
+        facebook: 'wesbos.developer'
+      }
+    }
+    console.clear();
+    console.log(wes);
+    const dev = Object.assign({}, wes);
+    dev.name = 'wesley';
+    console.log(dev);
+    dev.social.twitter = '@webbossman';
+    console.log(dev);
+    console.log(wes); //Object.assign only copies one level down, social is referenced instead of copied because it is nested 
+    //so when dev.social was modified, original wes.social got changed as well
+    //must use something like cloneDeep function
+    
+    //can use poor mans deepclone, but do not use this: stringify obj then convert string to obj
+    const dev2 = JSON.parse(JSON.stringify(wes));
+    console.log(dev2);
+    
 
   </script>
 
