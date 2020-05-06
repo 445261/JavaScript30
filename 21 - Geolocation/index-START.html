@@ -59,6 +59,20 @@
     /*Compass: https://thenounproject.com/search/?q=compass&i=592352*/
   </style>
   <script>
+    const arrow = document.querySelector('.arrow');
+    const speed = document.querySelector('.speed-value');
+
+    navigator.geolocation.watchPosition((data) => {
+      console.log(data);
+      speed.textContent = data.coords.speed;
+      //desktop does not have speed heading etc info, use accuracy to see a number
+      //speed.textContent = data.coords.accuracy;
+      
+      arrow.style.transform = `rotate${data.coords.heading}deg`;
+    }, (err) => {
+      console.error(err);
+      alert('unblock location access');
+    });
   </script>
 </body>
 </html>
