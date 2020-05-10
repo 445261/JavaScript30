@@ -9,6 +9,8 @@
   <div class="one">
     <div class="two">
       <div class="three">
+        <button type="button">click me</button>
+       
       </div>
     </div>
   </div>
@@ -40,8 +42,27 @@
   }
 </style>
 
-<button></button>
+<!-- <button>click me once</button> -->
 <script>
+  const divs = document.querySelectorAll('div');
+  const button = document.querySelectorAll('button');
+
+  function logText(e) {
+    console.log(this.classList.value);
+    //e.stopPropagation();
+
+  }
+  
+  divs.forEach(div => div.addEventListener('click', logText, {
+    capture: false,
+    once: true
+  }));
+
+  button.forEach(button => button.addEventListener('click', () => {
+    console.log('Click!!');
+  }, {
+    once: true
+  }));
 
 </script>
 </body>
